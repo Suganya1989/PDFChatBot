@@ -1,13 +1,13 @@
 {
   "functions": {
     "src/app/api/**/*.ts": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": [
+        "test/**/*",
+        "test/data/**/*"
+  ]
     }
   },
-  "includeFiles": [
-    "test/**/*",
-    "test/data/**/*"
-  ],
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "outputDirectory": ".next",
