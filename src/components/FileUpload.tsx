@@ -105,7 +105,7 @@ export default function FileUpload({ onUploadComplete }: FileUploadProps) {
           onDrop={handleDrop}
           onClick={openFileDialog}
         >
-          <input
+          <input title="Upload PDF" 
             ref={fileInputRef}
             type="file"
             accept=".pdf"
