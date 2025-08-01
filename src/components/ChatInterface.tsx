@@ -12,9 +12,10 @@ interface Message {
 interface ChatInterfaceProps {
   pdfUrl?: string;
   pdfName?: string;
+  pdfSize?: number;
 }
 
-export default function ChatInterface({ pdfUrl, pdfName }: ChatInterfaceProps) {
+export default function ChatInterface({ pdfUrl, pdfName, pdfSize }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -53,6 +54,7 @@ export default function ChatInterface({ pdfUrl, pdfName }: ChatInterfaceProps) {
         body: JSON.stringify({
           message: currentInput,
           pdfUrl: pdfUrl,
+          fileSize: pdfSize,
         }),
       });
       

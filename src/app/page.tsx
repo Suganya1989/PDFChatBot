@@ -8,10 +8,11 @@ export default function Home() {
   const [uploadedPdf, setUploadedPdf] = useState<{
     url: string;
     filename: string;
+    fileSize: number;
   } | null>(null);
 
-  const handleUploadComplete = (url: string, filename: string) => {
-    setUploadedPdf({ url, filename });
+  const handleUploadComplete = (url: string, filename: string, fileSize: number) => {
+    setUploadedPdf({ url, filename, fileSize });
   };
 
   return (
@@ -75,6 +76,7 @@ export default function Home() {
               <ChatInterface 
                 pdfUrl={uploadedPdf?.url} 
                 pdfName={uploadedPdf?.filename}
+                pdfSize={uploadedPdf?.fileSize}
               />
             </div>
           </div>
