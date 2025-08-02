@@ -19,7 +19,8 @@
     "openai": "^5.10.2",
     "patch-package": "^8.0.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "weaviate-ts-client": "^2.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

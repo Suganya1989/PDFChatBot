@@ -55,6 +55,7 @@ export default function ChatInterface({ pdfUrl, pdfName, pdfSize }: ChatInterfac
           message: currentInput,
           pdfUrl: pdfUrl,
           fileSize: pdfSize,
+          fileName: pdfName,
         }),
       });
       

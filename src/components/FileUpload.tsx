@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import { useEdgeStore } from '../lib/edgestore';
 
 interface FileUploadProps {
-  onUploadComplete: (url: string, filename: string, fileSize: number) => void;
+  onUploadComplete: (url: string, filename: string, fileSize: number,fileName:string) => void;
 }
 
 export default function FileUpload({ onUploadComplete }: FileUploadProps) {
@@ -64,7 +64,7 @@ export default function FileUpload({ onUploadComplete }: FileUploadProps) {
         },
       });
 
-      onUploadComplete(res.url, file.name, file.size);
+      onUploadComplete(res.url, file.name, file.size,file.name);
       setFile(null);
       setUploadProgress(0);
     } catch (error) {
