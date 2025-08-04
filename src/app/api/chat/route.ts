@@ -20,6 +20,36 @@ const weaviateClient = weaviate.client({
 const anthropic = createAnthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
+
+// TypeScript interfaces for OCR response
+interface OcrBlock {
+  text?: string;
+  content?: string;
+  [key: string]: unknown;
+}
+
+interface OcrPage {
+  text?: string;
+  content?: string | { text?: string };
+  blocks?: (string | OcrBlock)[];
+  [key: string]: unknown;
+}
+
+interface OcrResponse {
+  pages?: OcrPage[];
+  text?: string;
+  [key: string]: unknown;
+}
+
+// Interface for Weaviate chunk data
+interface WeaviateChunk {
+  text: string;
+  chunkIndex: number;
+  source: string;
+  fileSize: number;
+  totalChunks: number;
+}
+
 function chunkTextFromOcr(ocrArray: string[], maxTokens = 500): string[] {
   const chunks: string[] = [];
   let current = '';
@@ -36,7 +66,8 @@ function chunkTextFromOcr(ocrArray: string[], maxTokens = 500): string[] {
   if (current) chunks.push(current.trim());
   return chunks;
 }
-function extractTextFromOcr(ocrResponse: any): string {
+
+function extractTextFromOcr(ocrResponse: OcrResponse): string {
   let allText = '';
 
   try {
@@ -255,7 +286,7 @@ export async function POST(request: NextRequest) {
     }
     // For smaller PDFs or when we have a question about stored content
     // First, try to retrieve relevant chunks from Weaviate
-    let relevantChunks = [];
+    let relevantChunks: WeaviateChunk[] = [];
     let contextText = '';
     
     if (pdfUrl && fileName) {
